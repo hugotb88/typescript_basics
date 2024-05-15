@@ -13,11 +13,29 @@ form.addEventListener('submit', (e) =>{
     const name = document.querySelector('#nombre').value
     const password = document.querySelector('#password').value
 
+    //Prevent new Alerts
+    const activeAlert = document.querySelector('.alert')
+    activeAlert?.remove()
+
+    //Validation rendering messages in HTML
+    const alert = document.createElement('DIV') //In Uppercase because JS read HTML in that way... h1 --> 'H1'
+    alert.textContent = 'Alert Content'
+    alert.classList.add('alert', 'text-white', 'uppercase', 'text-sm', 'text-center', 'p-2', 'font-black') //Adding CSS
+    
     if(name === '' || password === ''){
-        console.log('All the fields are mandatory')
+        alert.textContent = 'All the fields are mandatory'
+        alert.classList.add('bg-red-500')
     }else{
-        console.log('Logging in')
+        alert.textContent ='Logging in'
+        alert.classList.add('bg-green-500')
     }
     
-    
+    console.log(alert)
+
+    //Add it to form
+    form.appendChild(alert)
+
+    setTimeout(() => {
+        alert.remove()  
+    },2000)
 })
